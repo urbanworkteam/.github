@@ -48,6 +48,22 @@
 
 ---
 
+## 🗺️ 전체 아키텍처
+
+컴퓨트를 **ECS에서 EKS로** 전환한 두 세대를 모두 운영했습니다. ECS는 Dev·Prod 이중 환경(Multi-AZ RDS·ElastiCache·알림 파이프라인)으로, EKS는 **서울 Active + 도쿄 Warm Standby 2-리전**에 Karpenter·KEDA·Istio·ArgoCD·Argo Rollouts를 얹어 구성했습니다.
+
+**ECS 아키텍처 (Dev · Prod)**
+<div align="center">
+  <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p19-ecs-architecture.png" width="100%" alt="ECS 아키텍처 (Dev·Prod)"/>
+</div>
+
+**EKS 아키텍처 (서울 Active · 도쿄 Warm Standby)**
+<div align="center">
+  <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p23-eks-architecture.png" width="100%" alt="EKS 아키텍처 (2-리전)"/>
+</div>
+
+---
+
 ## 🏗️ 서비스 아키텍처
 
 소비자는 CloudFront·S3의 React SPA로 농장 명함을 조회하고, 요청은 ALB → EKS → Istio Ingress → `farmily-api` Pod → RDS로 흐릅니다. AI 콘텐츠 생성은 Strands Agent가 Bedrock LLM을 호출하고 Lambda가 카드뉴스를 렌더링해 S3에 저장합니다.
@@ -58,6 +74,25 @@
     <td width="50%"><img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p10-arch-ai.png" alt="AI 콘텐츠 생성 Flow"/></td>
   </tr>
 </table>
+
+---
+
+## 📦 온프레미스 → 클라우드 마이그레이션 (DMS)
+
+온프레미스 VMware(CentOS 7 Web/WAS/DB 분리 서버)를 **7R 전략 중 Replatform**으로 ECS + RDS 관리형 아키텍처에 옮겼습니다. 소스·타깃이 모두 PostgreSQL이라 **AWS DMS 동종(Homogeneous) 마이그레이션**을 택해, Full Load + CDC로 **소스 무중단**을 유지하며 `pgvector` `vector(1024)` 같은 커스텀 타입까지 보존했습니다.
+
+<table>
+  <tr>
+    <td width="50%"><img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p14-migration-replatform.png" alt="7R Replatform"/></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p16-dms-architecture.png" alt="DMS 아키텍처"/></td>
+  </tr>
+</table>
+
+**검증** — 전체 24개 테이블 · 약 540만 행을 오류 0으로 적재하고, 소스=타깃 행 수 일치 · **CDC 지연 0ms** · `vector(1024)` 타입·차원 보존을 확인했습니다.
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p17-dms-validation.png" width="80%" alt="데이터 정합성 · 스키마 검증"/>
+</div>
 
 ---
 
@@ -158,6 +193,7 @@ kube-prometheus-stack이 클러스터 메트릭을, Fluent Bit·CloudWatch Agent
 
 | 항목 | 결과 |
 |---|---|
+| **온프레미스 → 클라우드 (DMS)** | 24개 테이블·약 540만 행 오류 0 적재, **CDC 지연 0ms**, pgvector 타입 보존 |
 | **ECS → EKS 무중단 전환** | 전 구간(100:0 ~ 0:100) **5xx 오류 0건**, 데이터 손실 0, 즉시 롤백 |
 | **재해복구 (DR)** | **RTO 7분 25초** · **RPO 4초** — 목표(10분/60초) 이내 달성 |
 | **부하 내성** | ECS Fargate 태스크 1→4 자동 확장, 427,421건 무장애 · 에러 0% |
