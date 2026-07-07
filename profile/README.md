@@ -59,7 +59,7 @@
 
 **EKS 아키텍처 (서울 Active · 도쿄 Warm Standby · DR 자동화)**
 <div align="center">
-  <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/eks-dr-architecture-v2.png" width="100%" alt="EKS 2-리전 아키텍처 + DR 자동화 파이프라인"/>
+  <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/eks-dr-architecture-v3.png" width="100%" alt="EKS 2-리전 아키텍처 + DR 자동화 파이프라인"/>
 </div>
 
 ---
