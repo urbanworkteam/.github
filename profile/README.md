@@ -36,17 +36,15 @@
 
 <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p03-team.png" width="100%" alt="팀원 소개"/>
 
-<div align="center">
-
-[![mins8578](https://github.com/mins8578.png?size=80)](https://github.com/mins8578)
-[![Moriental](https://github.com/Moriental.png?size=80)](https://github.com/Moriental)
-[![trieeun](https://github.com/trieeun.png?size=80)](https://github.com/trieeun)
-[![eustass99](https://github.com/eustass99.png?size=80)](https://github.com/eustass99)
-[![gimyw](https://github.com/gimyw.png?size=80)](https://github.com/gimyw)
-
-**@mins8578** · **@Moriental** · **@trieeun** · **@eustass99** · **@gimyw**
-
-</div>
+<table align="center">
+  <tr>
+    <td align="center"><a href="https://github.com/mins8578"><img src="https://github.com/mins8578.png" width="72" height="72" alt="mins8578"/><br/><sub><b>@mins8578</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Moriental"><img src="https://github.com/Moriental.png" width="72" height="72" alt="Moriental"/><br/><sub><b>@Moriental</b></sub></a></td>
+    <td align="center"><a href="https://github.com/trieeun"><img src="https://github.com/trieeun.png" width="72" height="72" alt="trieeun"/><br/><sub><b>@trieeun</b></sub></a></td>
+    <td align="center"><a href="https://github.com/eustass99"><img src="https://github.com/eustass99.png" width="72" height="72" alt="eustass99"/><br/><sub><b>@eustass99</b></sub></a></td>
+    <td align="center"><a href="https://github.com/gimyw"><img src="https://github.com/gimyw.png" width="72" height="72" alt="gimyw"/><br/><sub><b>@gimyw</b></sub></a></td>
+  </tr>
+</table>
 
 ---
 
