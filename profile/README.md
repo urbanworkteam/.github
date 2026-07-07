@@ -57,9 +57,9 @@
   <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p19-ecs-architecture.png" width="100%" alt="ECS 아키텍처 (Dev·Prod)"/>
 </div>
 
-**EKS 아키텍처 (서울 Active · 도쿄 Warm Standby)**
+**EKS 아키텍처 (서울 Active · 도쿄 Warm Standby · DR 자동화)**
 <div align="center">
-  <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/p23-eks-architecture.png" width="100%" alt="EKS 아키텍처 (2-리전)"/>
+  <img src="https://raw.githubusercontent.com/urbanworkteam/.github/main/assets/eks-dr-architecture.png" width="100%" alt="EKS 2-리전 아키텍처 + DR 자동화 파이프라인"/>
 </div>
 
 ---
